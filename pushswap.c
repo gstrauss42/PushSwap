@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/11 09:38:15 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/11 10:18:43 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 int main(int argc, char **argv)
 {
-	t_list *head;
+	t_list *lista;
+	t_list *listb;
 	
-	head = ft_lstmake(argv, ' ');
+	lista = ft_lstmake(argv, ' ');
+	printf("%s\n", lista->content);
 	return(0);
 }
