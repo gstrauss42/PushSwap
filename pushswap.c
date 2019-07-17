@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/11 10:18:43 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/17 10:36:02 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ int main(int argc, char **argv)
 	t_list *listb;
 	
 	lista = ft_lstmake(argv, ' ');
-	printf("%s\n", lista->content);
+	listb = ft_lstnew("blank", 7);
+	while(lista)
+	{
+		printf("lista: %s\n", lista->content);
+		if(lista->next)
+			lista = lista->next;
+		else
+			break;
+	}
+	printf("\n");
+	printf("listb: %s\n", listb->content);
 	return(0);
 }
