@@ -5,30 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/20 06:59:55 by gstrauss         ###   ########.fr       */
+/*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/07/19 11:57:11 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
+
+
+
+
 
 int main(int argc, char **argv)
 {
-	t_list *lista;
-	t_list *listb;
-	
-	lista = ft_lstmake(argv, ' ');
-	ra(&lista);
-	while(lista)
+	if(ft_strcmp(argv[1], "sa") == 0)
 	{
-		printf("lista: %s\n", lista->content);
-		if(lista->next)
-			lista = lista->next;
-		else
-			break;
 	}
-//	printf("\n");
-//	printf("listb: %s\n", listb->content);
-	return(0);
+	if(ft_strcmp(argv[1], "sb") == 0)
+	{
+	}
+	if(ft_strcmp(argv[1], "ss") == 0)
+	{
+	}
+	if(ft_strcmp(argv[1], "pa") == 0)
+	{
+	}
+	if(ft_strcmp(argv[1], "pb") == 0)
+	{
+	}
+	if(ft_strcmp(argv[1], "ra") == 0)
+	{
+	}
+	if(ft_strcmp(argv[1], "rb") == 0)
+	{
+	}
+	if(ft_strcmp(argv[1], "rr") == 0)
+	{
+	}
+	if(ft_strcmp(argv[1], "rra") == 0)
+	{
+	}
+	if(ft_strcmp(argv[1], "rrb") == 0)
+	{
+	}
+	if(ft_strcmp(argv[1], "rrr") == 0)
+	{
+	}
 }
+
