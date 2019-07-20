@@ -6,14 +6,11 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/19 11:57:11 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/20 07:27:02 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-
-
+#include "libft/libft.a"
 
 int main(int argc, char **argv)
 {
@@ -51,4 +48,3 @@ int main(int argc, char **argv)
 	{
 	}
 }
-
