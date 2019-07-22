@@ -6,20 +6,20 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/22 14:08:02 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/22 16:28:03 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-#include <stdio.h>
 
-void	check(char *line, t_list *lista, t_list *listb);
-void	checks(char *line, t_list *lista, t_list *listb);
+void	check(char *line, t_list **lista, t_list **listb);
+void	checks(char *line, t_list **lista, t_list **listb);
 
 int main(int argc, char **argv)
 {
 	char *line;
-	
+
+	t_list *tmp;	
 	t_list *lista;
 	t_list *listb = NULL;
 	lista = ft_lstmake(argv, ' ', 1);
@@ -27,12 +27,13 @@ int main(int argc, char **argv)
 	{
 		if(argc > 1)
 		{
-			check(line, lista, listb);
-			while(lista)
+			check(line, &lista, &listb);
+			tmp = lista;
+			while(tmp)
 			{
-				printf("lista: %s\n", lista->content);
-				if(lista->next)
-					lista = lista->next;
+				printf("lista: %s\n", tmp->content);
+				if(tmp->next)
+					tmp = tmp->next;
 				else
 					break;
 			}
@@ -47,42 +48,42 @@ int main(int argc, char **argv)
 	return(0);
 }
 
-void	check(char *line, t_list *lista, t_list *listb)
+void	check(char *line, t_list **lista, t_list **listb)
 {
 		if(ft_strcmp(line, "sa") == 0)
-			sa(lista);
+			sa(*lista);
 		if(ft_strcmp(line, "sb") == 0)
-			sb(listb);
+			sb(*listb);
 		if(ft_strcmp(line, "ss") == 0)
 		{
-			sa(lista);
-			sb(listb);
+			sa(*lista);
+			sb(*listb);
 		}
 		if(ft_strcmp(line, "pa") == 0)
-			pa(&lista, &listb);
+			pa(lista, listb);
 		if(ft_strcmp(line, "pb") == 0)
-			pb(&lista, &listb);
+			pb(lista, listb);
 		if(ft_strcmp(line, "ra") == 0)
-			ra(&lista);
+			ft_ra(lista);
 		if(ft_strcmp(line, "rb") == 0)
-			rb(&listb);
+			rb(listb);
 		checks(line, lista, listb);
 }
 
-void	checks(char *line, t_list *lista, t_list *listb)
+void	checks(char *line, t_list **lista, t_list **listb)
 {
 		if(ft_strcmp(line, "rr") == 0)
 		{
-			ra(&lista);
-			rb(&listb);
+			ft_ra(lista);
+			rb(listb);
 		}
 		if(ft_strcmp(line, "rra") == 0)
-			rra(&lista);
+			rra(lista);
 		if(ft_strcmp(line, "rrb") == 0)
-			rrb(&listb);
+			rrb(listb);
 		if(ft_strcmp(line, "rrr") == 0)
 		{
-			rra(&lista);
-			rrb(&listb);
+			rra(lista);
+			rrb(listb);
 		}
 }
