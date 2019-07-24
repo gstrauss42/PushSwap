@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/23 11:41:44 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/23 12:03:05 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ int main(int argc, char **argv)
 		}
 		free(line);
 	}
+	while(!listb && lista->next && atoi((char *)lista->content)\
+			< atoi((char *)lista->next->content))
+			lista = lista->next;
+	if(!lista->next)
+		printf("OK");
+	if(lista->next)
+		printf("KO");
 	return(0);
 }
 
