@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/23 12:03:05 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/24 13:44:13 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,7 @@
 
 void	check(char *line, t_list **lista, t_list **listb);
 void	checks(char *line, t_list **lista, t_list **listb);
-
-void	output(t_list **lista, t_list **listb)
-{
-	t_list *tmp;
-	t_list *ttmp;
-	tmp = *lista;	
-	while(tmp && tmp->content)
-	{
-		printf("lista: %s\n", tmp->content);
-		if(tmp->next)
-			tmp = tmp->next;
-		else
-			break;
-	}
-	ttmp = *listb;
-	printf("\n");
-	while(ttmp && ttmp->content)
-	{
-		printf("listb: %s\n", ttmp->content);
-		if(ttmp->next)
-			ttmp = ttmp->next;
-		else
-			break;
-	}
-}
+void	output(t_list **lista, t_list **listb);
 
 int main(int argc, char **argv)
 {
@@ -46,7 +22,7 @@ int main(int argc, char **argv)
 
 	t_list *lista = NULL;
 	t_list *listb = NULL;
-	lista = ft_lstmake(argv, ' ', 1);
+	lista = ft_lstmake(argv);
 	while(get_next_line(1, &line))
 	{
 		if(argc > 1)
@@ -105,3 +81,30 @@ void	checks(char *line, t_list **lista, t_list **listb)
 			rrb(listb);
 		}
 }
+
+void	output(t_list **lista, t_list **listb)
+{
+	t_list *tmp;
+	t_list *ttmp;
+	tmp = *lista;	
+	while(tmp && tmp->content)
+	{
+		printf("lista: %s\n", tmp->content);
+		if(tmp->next)
+			tmp = tmp->next;
+		else
+			break;
+	}
+	ttmp = *listb;
+	printf("\n");
+	while(ttmp && ttmp->content)
+	{
+		printf("listb: %s\n", ttmp->content);
+		if(ttmp->next)
+			ttmp = ttmp->next;
+		else
+			break;
+	}
+}
+
+
