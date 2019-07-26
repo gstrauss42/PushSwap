@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/24 13:44:13 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/26 11:23:42 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int main(int argc, char **argv)
 	t_list *lista = NULL;
 	t_list *listb = NULL;
 	lista = ft_lstmake(argv);
-	while(get_next_line(1, &line))
+	while(get_next_line(0, &line))
 	{
 		if(argc > 1)
 		{
 			check(line, &lista, &listb);
-			output(&lista, &listb);
+//			output(&lista, &listb);
 		}
 		free(line);
 	}
@@ -45,22 +45,22 @@ int main(int argc, char **argv)
 void	check(char *line, t_list **lista, t_list **listb)
 {
 		if(ft_strcmp(line, "sa") == 0)
-			sa(*lista);
+			ft_sa(*lista);
 		if(ft_strcmp(line, "sb") == 0)
-			sb(*listb);
+			ft_sb(*listb);
 		if(ft_strcmp(line, "ss") == 0)
 		{
-			sa(*lista);
-			sb(*listb);
+			ft_sa(*lista);
+			ft_sb(*listb);
 		}
 		if(ft_strcmp(line, "pa") == 0)
-			pa(lista, listb);
+			ft_pa(lista, listb);
 		if(ft_strcmp(line, "pb") == 0)
-			pb(lista, listb);
+			ft_pb(lista, listb);
 		if(ft_strcmp(line, "ra") == 0)
 			ft_ra(lista);
 		if(ft_strcmp(line, "rb") == 0)
-			rb(listb);
+			ft_rb(listb);
 		checks(line, lista, listb);
 }
 
@@ -69,16 +69,16 @@ void	checks(char *line, t_list **lista, t_list **listb)
 		if(ft_strcmp(line, "rr") == 0)
 		{
 			ft_ra(lista);
-			rb(listb);
+			ft_rb(listb);
 		}
 		if(ft_strcmp(line, "rra") == 0)
-			rra(lista);
+			ft_rra(lista);
 		if(ft_strcmp(line, "rrb") == 0)
-			rrb(listb);
+			ft_rrb(listb);
 		if(ft_strcmp(line, "rrr") == 0)
 		{
-			rra(lista);
-			rrb(listb);
+			ft_rra(lista);
+			ft_rrb(listb);
 		}
 }
 

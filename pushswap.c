@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/25 09:36:37 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/26 11:20:07 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,8 @@ void	pushback(t_list **lista, t_list **listb)
 {
 	while(*listb)
 	{
-//		write(1, "pa\n", 3);
-		pa(lista, listb);
-	//	output(lista, listb);
+		write(1, "pa\n", 3);
+		ft_pa(lista, listb);
 	}
 }
 
@@ -44,28 +43,24 @@ void	firstpushinstructions(t_list *ttemp, t_list **lista, int count, t_list **li
 {
 	int i;
 	int position;
-	if(ttemp && lista)
+	if(ttemp && *lista)
 		position = ft_lstplen(*lista, ttemp);
 	i = 0;
-	if(ttemp->content)
-		printf("%s\n", ttemp->content);
-	while(*lista != ttemp)
+	while(*lista && ttemp && ft_strcmp((*lista)->content, ttemp->content) != 0)
 	{
 		if(count / 2 > position)
 		{
-			rra(lista);
-//			write(1, "rra\n", 4);
+			ft_rra(lista);
+			write(1, "rra\n", 4);
 		}
 		else if(count / 2 <= position)
 		{
 			ft_ra(lista);
-//			write(1, "ra\n", 3);
+			write(1, "ra\n", 3);
 		}
-	//	output(lista, listb);
 	}
-	pb(lista, listb);
-//	write(1, "pb\n", 3);
-//	output(lista, listb);
+	ft_pb(lista, listb);
+	write(1, "pb\n", 3);
 }
 
 void	checks(t_list **lista, t_list **listb)
@@ -83,8 +78,9 @@ void	checks(t_list **lista, t_list **listb)
 		{
 			if(temp->content && check > ft_atoi(temp->content))
 			{
-				check = ft_atoi(temp->content);
 				ttemp = temp;
+				check = ft_atoi(temp->content);
+				ttemp = ft_lstnew(temp->content, temp->content_size);
 			}
 			count++;
 			if(temp->next)
@@ -99,7 +95,7 @@ void	checks(t_list **lista, t_list **listb)
 			check = ft_atoi((*lista)->content);
 			temp = *lista;
 			ttemp = NULL;
-			ttemp = *lista;
+			ttemp = ft_lstnew((*lista)->content, (*lista)->content_size);
 		}
 	}
 	pushback(lista, listb);
