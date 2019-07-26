@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/26 11:23:42 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/26 13:49:16 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	check(char *line, t_list **lista, t_list **listb);
 void	checks(char *line, t_list **lista, t_list **listb);
 void	output(t_list **lista, t_list **listb);
+int		error(t_list *lista);
 
 int main(int argc, char **argv)
 {
@@ -23,6 +24,8 @@ int main(int argc, char **argv)
 	t_list *lista = NULL;
 	t_list *listb = NULL;
 	lista = ft_lstmake(argv);
+	if(error(lista) == 1)
+		return(0);
 	while(get_next_line(0, &line))
 	{
 		if(argc > 1)
@@ -39,6 +42,38 @@ int main(int argc, char **argv)
 		printf("OK");
 	if(lista->next)
 		printf("KO");
+	return(0);
+}
+
+int		error(t_list *lista)
+{
+	t_list *temp;
+	while(lista)
+	{
+		if(lista->next)
+			temp = lista->next;
+		while(temp && lista != temp)
+		{
+			if(lista->content && temp->content && ft_strcmp((char *)lista->content, (char *)temp->content) == 0)
+			{
+				write(1, "Erro1\n", 6);
+				return(1);
+			}
+			if(temp->next)
+				temp = temp->next;
+			else
+				break;
+		}
+		if(ft_isint(lista->content) == 0)
+		{
+			write(1, "Erro2\n", 6);
+			return(1);
+		}
+		if(lista->next)
+			lista = lista->next;
+		else
+			break;
+	}
 	return(0);
 }
 
