@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/26 13:49:16 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/29 11:32:02 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		error(t_list *lista);
 int main(int argc, char **argv)
 {
 	char *line;
-
 	t_list *lista = NULL;
 	t_list *listb = NULL;
 	lista = ft_lstmake(argv);
@@ -50,8 +49,7 @@ int		error(t_list *lista)
 	t_list *temp;
 	while(lista)
 	{
-		if(lista->next)
-			temp = lista->next;
+		temp = lista->next;
 		while(temp && lista != temp)
 		{
 			if(lista->content && temp->content && ft_strcmp((char *)lista->content, (char *)temp->content) == 0)
@@ -141,5 +139,3 @@ void	output(t_list **lista, t_list **listb)
 			break;
 	}
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/26 13:50:14 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/29 10:24:04 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,16 @@ int main(int argc, char **argv)
 {
 	if(argc > 1)
 	{
+		t_list *tmp;
 		t_list *lista;
 		t_list *listb;
 		lista = ft_lstmake(argv);
+		tmp = lista;
+		while(tmp->next && atoi((char *)tmp->content)\
+				< atoi((char *)tmp->next->content))
+				tmp = tmp->next;
+		if(!tmp->next)
+			return(0);
 //		output(&lista, &listb);
 		checks(&lista, &listb);
 //		output(&lista, &listb);
