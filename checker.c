@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/29 13:37:24 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/05 11:45:15 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main(int argc, char **argv)
 		{
 			if(check(line, &lista, &listb) == 0)
 				return(0);
+			output(&lista, &listb);
 		}
 		free(line);
 	}
@@ -83,11 +84,11 @@ int		check(char *line, t_list **lista, t_list **listb)
 		if(ft_strcmp(line, "sa") == 0)
 			ft_sa(*lista);
 		else if(ft_strcmp(line, "sb") == 0)
-			ft_sb(*listb);
+			ft_sb(listb);
 		else if(ft_strcmp(line, "ss") == 0)
 		{
 			ft_sa(*lista);
-			ft_sb(*listb);
+			ft_sb(listb);
 		}
 		else if(ft_strcmp(line, "pa") == 0)
 			ft_pa(lista, listb);
