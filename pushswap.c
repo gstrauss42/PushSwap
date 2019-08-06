@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/06 07:45:27 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/06 08:55:49 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	output(t_list **lista, t_list **listb)
 	while(tmp && tmp->content)
 	{
 		write(1, "Lista:", 6);
+		ft_putnbr(tmp->fpos);
+		write(1, "   ", 3);
 		ft_putendl((char *)tmp->content);
 		if(tmp->next)
 			tmp = tmp->next;
@@ -68,6 +70,8 @@ void	output(t_list **lista, t_list **listb)
 	while(ttmp && ttmp->content)
 	{
 		write(1, "Listb:", 6);
+		ft_putnbr(tmp->fpos);
+		write(1, "   ", 3);
 		ft_putendl((char *)ttmp->content);
 		if(ttmp->next)
 			ttmp = ttmp->next;
@@ -76,26 +80,72 @@ void	output(t_list **lista, t_list **listb)
 	}
 }
 
-void	algo(t_list **lista, t_ist **listb)
+void	order(t_list **lista)
 {
-	t_list *tmpa = *lista;
-	t_list *tmpb = *listb;
+	t_list *tmp;
+	t_list *ttmp = *lista;
+	int p = 1;
+	int i = ft_atoi((*lista)->content);
 	while(true)
 	{
-		while(tmpb)
-		{
-
+		(*lista)->fpos = 0;
+		if((*lista)->next)
+			*lista = (*lista)->next;
+		else
+			break;
 	}
+	*lista = ttmp;
+	while(p < ft_lstlen(ttmp) + 2)
+	{
+		while(true)
+		{
+			if(i >= ft_atoi((*lista)->content) && (*lista)->fpos == 0)
+			{
+				i = ft_atoi((*lista)->content);
+				tmp = *lista;
+			}
+			if((*lista)->next)
+				*lista = (*lista)->next;
+			else
+				break;
+		}
+		*lista = ttmp;
+		tmp->fpos = p;
+		while((*lista)->fpos != 0)
+		{
+			if((*lista)->next)
+				*lista = (*lista)->next;
+			else
+				break;
+		}
+		if(!(*lista)->next && (*lista)->fpos != 0)
+			break;
+		i = ft_atoi((*lista)->content);
+		p++;
+	}
+/*	while(ttmp)
+	{
+		printf("%d\n", ttmp->fpos);
+		if(ttmp->next)
+			ttmp = ttmp->next;
+		else
+			break;
+	}*/
+	*lista = ttmp;
 }
 
-t_list	*order(
+void	algo(t_list **lista, t_list **listb)
+{
+	listb = NULL;
+	(*lista)->fpos++;
+//	t_list *tmpa = *lista;
+//	t_list *tmpb = *listb;
+}
 
 void	standard(t_list **lista, t_list **listb)
 {
-	int i = ft_lstlen;
-	t_list *final = order(*lista);
-	
-	t_list *tmp = *lista;
+
+	order(lista);	
 	ft_pb(lista, listb);
 	write(1, "pb\n", 3);
 	ft_pb(lista, listb);
@@ -106,5 +156,5 @@ void	standard(t_list **lista, t_list **listb)
 		ft_sb(listb);
 		write(1, "sb\n", 3);
 	}
-	algo();
+	algo(lista, listb);
 }
