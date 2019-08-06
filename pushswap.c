@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/06 08:55:49 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/06 09:57:46 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	output(t_list **lista, t_list **listb)
 	while(ttmp && ttmp->content)
 	{
 		write(1, "Listb:", 6);
-		ft_putnbr(tmp->fpos);
+		ft_putnbr(ttmp->fpos);
 		write(1, "   ", 3);
 		ft_putendl((char *)ttmp->content);
 		if(ttmp->next)
@@ -123,34 +123,22 @@ void	order(t_list **lista)
 		i = ft_atoi((*lista)->content);
 		p++;
 	}
-/*	while(ttmp)
-	{
-		printf("%d\n", ttmp->fpos);
-		if(ttmp->next)
-			ttmp = ttmp->next;
-		else
-			break;
-	}*/
 	*lista = ttmp;
 }
 
 void	algo(t_list **lista, t_list **listb)
 {
-	listb = NULL;
-	(*lista)->fpos++;
-//	t_list *tmpa = *lista;
-//	t_list *tmpb = *listb;
+	t_list *tmpa = *lista;
+	t_list *tmpb = *listb;
 }
 
 void	standard(t_list **lista, t_list **listb)
 {
-
 	order(lista);	
 	ft_pb(lista, listb);
 	write(1, "pb\n", 3);
 	ft_pb(lista, listb);
 	write(1, "pb\n", 3);
-
 	if(ft_atoi((*listb)->content) < ft_atoi((*listb)->next->content))
 	{
 		ft_sb(listb);

@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/05 11:45:15 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/06 09:50:37 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ int		check(char *line, t_list **lista, t_list **listb)
 {
 		int i = 0;
 		if(ft_strcmp(line, "sa") == 0)
-			ft_sa(*lista);
+			ft_sa(lista);
 		else if(ft_strcmp(line, "sb") == 0)
 			ft_sb(listb);
 		else if(ft_strcmp(line, "ss") == 0)
 		{
-			ft_sa(*lista);
+			ft_sa(lista);
 			ft_sb(listb);
 		}
 		else if(ft_strcmp(line, "pa") == 0)
