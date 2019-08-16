@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/06 09:57:46 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/16 09:48:53 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,13 @@ void	order(t_list **lista)
 
 void	algo(t_list **lista, t_list **listb)
 {
-	t_list *tmpa = *lista;
-	t_list *tmpb = *listb;
+	t_list *tmpa = ft_lstdup(*lista);
+	t_list *tmpb = ft_lstdup(*listb);
+	int i = 0;
+	int count[ft_lstlen(tmpa) + 1];
+/*	while(tmpa)
+	{
+	*/	
 }
 
 void	standard(t_list **lista, t_list **listb)
