@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/16 09:48:53 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/19 13:39:12 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,96 @@ void	order(t_list **lista)
 	*lista = ttmp;
 }
 
+void	perform(t_list **lista, t_list **listb, t_list *node)
+{
+	int count = ft_lstlen(*lista);
+	while(count == ft_lstlen(*lista))
+	{
+		if(ft_lstplen(*lista, tmp) > (ft_lstlen(*lista) / 2))
+		{
+			if(ft_lstlen(*listb) < (ft_lstlen(*lista)) - ft_lstplen(*lista, node))
+			{
+				while(*lista != node)
+				{
+					ft_rra(*lista);
+					if(ft_posdif(*listb, node) != 0)
+					{
+						ft_rrb(*listb);
+						write(1, "rrr\n", 4);
+					}
+					else
+						write(1, "rra\n", 4);
+				}
+			}
+		}
+		else if(ft_lstplen(*lista, tmp) <= (ft_lstlen(*lista) / 2))
+			y = ft_lstplen(*lista);
+	}
+	if(ft_lstlen(*listb) <= y)
+		y = y;
+	if(ft_lstlen(*listb) > y)
+	{
+		if(ft_lstplen(*lista, tmp) > (ft_lstlen(*lista) / 2) && ft_posdif(*listb, tmp) > ft_lstlen(*listb) / 2)
+		{
+			if((ft_lstlen(*listb) - ft_posdif(*listb, tmp)) - y >= 0)
+				y = ft_lstlen(*listb) - ft_posdif(*listb, tmp) - y;
+			else
+				y = y + ft_posdif(*listb, tmp) - y;
+		}
+	}	
+}
+
 void	algo(t_list **lista, t_list **listb)
 {
+	t_list *ret;
+	t_list *tmp;
 	t_list *tmpa = ft_lstdup(*lista);
 	t_list *tmpb = ft_lstdup(*listb);
-	int i = 0;
-	int count[ft_lstlen(tmpa) + 1];
-/*	while(tmpa)
+	int check = 10000000;
+	int y = 0;
+	while(tmpa)
 	{
-	*/	
+//		tmpa = ft_lstdup(*lista);
+		tmp = *lista;
+		while(tmp)
+		{
+			if(tmp)
+			{
+				while(tmp != lista)
+				{
+					if(ft_lstplen(*lista, tmp) > (ft_lstlen(*lista) / 2))
+						y = ft_lstlen(*lista) - ft_lstplen(*lista, tmp);
+					else if(ft_lstplen(*lista, tmp) <= (ft_lstlen(*lista) / 2))
+						y = ft_lstplen(*lista);
+				}
+				if(ft_lstlen(*listb) <= y)
+					y = y;
+				if(ft_lstlen(*listb) > y)
+				{
+					if(ft_lstplen(*lista, tmp) > (ft_lstlen(*lista) / 2) && ft_posdif(*listb, tmp) > ft_lstlen(*listb) / 2)
+					{
+						if((ft_lstlen(*listb) - ft_posdif(*listb, tmp)) - y >= 0)
+							y = ft_lstlen(*listb) - ft_posdif(*listb, tmp) - y;
+						else
+							y = y + ft_posdif(*listb, tmp) - y;
+					}
+				}
+			}
+			//LOGIC FOR FINDING EACH OPTIMUM PATH
+			if(y < check) // y is number of steps vs current least steps
+			{
+				check = y;
+				ret = tmp;	//ret is to pass to the operation part of the algo
+			}
+			if(tmp->next)
+				tmp = tmp->next;
+			else
+				break;
+		}
+		perform(lista, listb, ret);
+		y = 1000000;
+//		ft_lstdel(&tmpa, ft_del);
+	}
 }
 
 void	standard(t_list **lista, t_list **listb)
