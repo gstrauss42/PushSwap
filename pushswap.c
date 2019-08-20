@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/20 13:42:45 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/20 14:27:52 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,38 @@ void	order(t_list **lista)
 	*lista = ttmp;
 }
 
+void	retfpos(t_list **listb)
+{
+	t_list *tmp = (*listb);
+	t_list *ttmp;
+	int check = -1;
+	while(true)
+	{
+		if(tmp->fpos > check)
+		{
+			ttmp = tmp;
+			check = tmp->fpos;
+		}
+		if(tmp->next)
+			tmp = tmp->next;
+		else
+			break;
+	}
+	while(*listb != ttmp)
+	{
+		if(ft_lstplen(*listb, ttmp) >= ft_lstlen(*listb) / 2)
+		{
+			write(1, "rrb\n", 3);
+			ft_rrb(listb);
+		}
+		else
+		{
+			write(1, "rb\n", 3);
+			ft_rb(listb);
+		}
+	}
+}
+
 void	perform(t_list **lista, t_list **listb, t_list *node)
 {
 	if(ft_lstplen(*lista, node) > (ft_lstlen(*lista) / 2))
@@ -182,6 +214,7 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 	}
 	ft_pb(lista, listb);
 	write(1, "pb\n", 3);
+	retfpos(listb);
 }
 
 void	algo(t_list **lista, t_list **listb)
@@ -193,6 +226,7 @@ void	algo(t_list **lista, t_list **listb)
 	tmp = *lista;
 	while(tmp)
 	{
+		output(lista, listb);
 		tmp = *lista;
 		while(tmp)
 		{
