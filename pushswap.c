@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/20 14:27:52 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/22 16:30:18 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	output(t_list **lista, t_list **listb)
 	t_list *tmp;
 	t_list *ttmp;
 	tmp = *lista;
+	write(1, "Lista:\n", 7);
 	while(tmp && tmp->content)
 	{
-		write(1, "Lista:", 6);
 		ft_putnbr(tmp->fpos);
 		write(1, "   ", 3);
 		ft_putendl((char *)tmp->content);
@@ -69,9 +69,9 @@ void	output(t_list **lista, t_list **listb)
 			break;
 	}
 	ttmp = *listb;
+	write(1, "Listb:\n" ,7);
 	while(ttmp && ttmp->content)
 	{
-		write(1, "Listb:", 6);
 		ft_putnbr(ttmp->fpos);
 		write(1, "   ", 3);
 		ft_putendl((char *)ttmp->content);
@@ -80,6 +80,7 @@ void	output(t_list **lista, t_list **listb)
 		else
 			break;
 	}
+	write(1, "\n", 1);
 }
 
 void	order(t_list **lista)
@@ -149,7 +150,7 @@ void	retfpos(t_list **listb)
 	{
 		if(ft_lstplen(*listb, ttmp) >= ft_lstlen(*listb) / 2)
 		{
-			write(1, "rrb\n", 3);
+			write(1, "rrb\n", 4);
 			ft_rrb(listb);
 		}
 		else
@@ -164,19 +165,16 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 {
 	if(ft_lstplen(*lista, node) > (ft_lstlen(*lista) / 2))
 	{
-		if(ft_lstlen(*listb) < (ft_lstlen(*lista)) - ft_lstplen(*lista, node))
+		while(*lista && node && *lista != node)
 		{
-			while(*lista && node && *lista != node)
+			ft_rra(lista);
+			if(ft_posdif(*listb, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node))
 			{
-				ft_rra(lista);
-				if(ft_posdif(*listb, node) != 0)
-				{
-					ft_rrb(listb);
-					write(1, "rrr\n", 4);
-				}
-				else
-					write(1, "rra\n", 4);
+				ft_rrb(listb);
+				write(1, "rrr\n", 4);
 			}
+			else
+				write(1, "rra\n", 4);
 		}
 	}
 	if(ft_lstplen(*lista, node) <= (ft_lstlen(*lista) / 2))
@@ -184,7 +182,7 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 		while( *lista && node && *lista != node)
 		{
 			ft_ra(lista);
-			if(ft_lstlen(*lista) - ft_lstplen(*lista, node) >= ft_posdif(*listb, node) || ft_posdif(*listb, node) < ft_lstlen(*listb) / 2) // also check if double operations can reduce total required operations if not completelly matchup
+			if(ft_lstlen(*lista) - ft_lstplen(*lista, node) >= ft_posdif(*listb, node) || ft_posdif(*listb, node) < ft_lstlen(*listb) / 2) 
 			{
 				ft_rb(listb);
 				write(1, "rr\n", 3);
