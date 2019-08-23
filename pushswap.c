@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/22 16:30:18 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/23 14:38:22 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,38 +129,6 @@ void	order(t_list **lista)
 	*lista = ttmp;
 }
 
-void	retfpos(t_list **listb)
-{
-	t_list *tmp = (*listb);
-	t_list *ttmp;
-	int check = -1;
-	while(true)
-	{
-		if(tmp->fpos > check)
-		{
-			ttmp = tmp;
-			check = tmp->fpos;
-		}
-		if(tmp->next)
-			tmp = tmp->next;
-		else
-			break;
-	}
-	while(*listb != ttmp)
-	{
-		if(ft_lstplen(*listb, ttmp) >= ft_lstlen(*listb) / 2)
-		{
-			write(1, "rrb\n", 4);
-			ft_rrb(listb);
-		}
-		else
-		{
-			write(1, "rb\n", 3);
-			ft_rb(listb);
-		}
-	}
-}
-
 void	perform(t_list **lista, t_list **listb, t_list *node)
 {
 	if(ft_lstplen(*lista, node) > (ft_lstlen(*lista) / 2))
@@ -212,19 +180,19 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 	}
 	ft_pb(lista, listb);
 	write(1, "pb\n", 3);
-	retfpos(listb);
+	ft_reorder(listb);
 }
 
 void	algo(t_list **lista, t_list **listb)
 {
 	t_list *ret;
 	t_list *tmp;
-	int check = 10000000;
+	int check;
 	int y = 0;
 	tmp = *lista;
 	while(tmp)
 	{
-		output(lista, listb);
+		check = 1000000;
 		tmp = *lista;
 		while(tmp)
 		{
@@ -254,7 +222,7 @@ void	algo(t_list **lista, t_list **listb)
 				break;
 		}
 		perform(lista, listb, ret);
-		check = 1000000;
+		output(lista, listb);
 	}
 }
 
@@ -271,9 +239,8 @@ void	standard(t_list **lista, t_list **listb)
 {
 	order(lista);	
 	ft_pb(lista, listb);
-	write(1, "pb\n", 3);
 	ft_pb(lista, listb);
-	write(1, "pb\n", 3);
+	write(1, "pb\npb\n", 6);
 	if(ft_atoi((*listb)->content) < ft_atoi((*listb)->next->content))
 	{
 		ft_sb(listb);
@@ -281,4 +248,5 @@ void	standard(t_list **lista, t_list **listb)
 	}
 	algo(lista, listb);
 	pushback(lista, listb);
+	ft_reorder(lista);
 }

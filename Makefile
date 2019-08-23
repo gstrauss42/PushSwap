@@ -6,7 +6,7 @@
 #    By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/19 09:04:58 by gstrauss          #+#    #+#              #
-#    Updated: 2019/07/29 11:37:51 by gstrauss         ###   ########.fr        #
+#    Updated: 2019/08/23 14:00:10 by gstrauss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,5 +23,9 @@ lib_ft:
 
 clean:
 	rm -f push_swap
+
+debug: 
+	$(CMPL) push_swap libft/*.c libft/pushswap_functions/*.c pushswap.c -Wall -Werror -Wextra -g
+	$(CMPL) checker libft/*.c libft/pushswap_functions/*.c checker.c -Wall -Werror -Wextra -g
 
 re: fclean all
