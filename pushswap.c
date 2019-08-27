@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/26 16:21:20 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/27 09:43:09 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,13 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 	{
 		while(*lista && node && (*lista)->fpos != node->fpos)
 		{
-			if(ft_lstlen(*lista) - ft_lstplen(*lista, node) < (ft_lstlen(*lista) / 2) + 1)
+			if(ft_lstlen(*lista) - ft_lstplen(*lista, node) < (ft_lstlen(*lista) / 2) + 1&& *listb != node)
 			{
+				write(1, (char *)node->content, 8);
+				write(1, "\n", 1);
+				write(1, ft_itoa(node->fpos), 8);
 				ft_rra(lista);
+				output(lista, listb);
 				if(ft_posdif(*listb, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node))
 				{
 					ft_rrb(listb);
@@ -150,7 +154,7 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 			else
 			{
 				ft_rb(listb);
-				if(ft_posdif(*listb, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node))
+				if(ft_posdif(*listb, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node) && *listb != node)
 				{
 					ft_rb(listb);
 					write(1, "rr\n", 4);
@@ -194,7 +198,6 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 		}
 	}
 	ft_pb(lista, listb);
-	ft_reorder(listb);
 }
 
 void	algo(t_list **lista, t_list **listb)
@@ -204,9 +207,10 @@ void	algo(t_list **lista, t_list **listb)
 	int check;
 	int y = 0;
 	tmp = *lista;
-	while(tmp)
+	while(tmp && *listb)
 	{
-		check = 1000000;
+		y = 0;
+		check = 10000000;
 		tmp = *lista;
 		while(tmp)
 		{
@@ -236,8 +240,10 @@ void	algo(t_list **lista, t_list **listb)
 				break;
 		}
 		write(1, ft_itoa(y), 1);
-		perform(lista, listb, ret);
+		if(*listb)
+			perform(lista, listb, ret);
 		output(lista, listb);
+		ret = *lista;
 	}
 }
 
@@ -256,5 +262,6 @@ void	standard(t_list **lista, t_list **listb)
 	ft_pb(lista, listb);
 	write(1, "pb\n", 3);
 	algo(lista, listb);
+//	ft_reorder(listb);
 	pushback(lista, listb);
 }
