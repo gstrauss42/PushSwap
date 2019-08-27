@@ -1,5 +1,4 @@
-fix reorder
-find the bug with big sets
+fix the order bug
 norm
 leak
 mark
