@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/27 09:43:09 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/27 13:01:02 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 				write(1, "\n", 1);
 				write(1, ft_itoa(node->fpos), 8);
 				ft_rra(lista);
-				output(lista, listb);
+//				output(lista, listb);
 				if(ft_posdif(*listb, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node))
 				{
 					ft_rrb(listb);
@@ -242,7 +242,7 @@ void	algo(t_list **lista, t_list **listb)
 		write(1, ft_itoa(y), 1);
 		if(*listb)
 			perform(lista, listb, ret);
-		output(lista, listb);
+//		output(lista, listb);
 		ret = *lista;
 	}
 }
@@ -262,6 +262,6 @@ void	standard(t_list **lista, t_list **listb)
 	ft_pb(lista, listb);
 	write(1, "pb\n", 3);
 	algo(lista, listb);
-//	ft_reorder(listb);
+	ft_reorder(listb);
 	pushback(lista, listb);
 }
