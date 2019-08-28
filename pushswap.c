@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/28 11:34:03 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/28 14:19:19 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,112 +17,120 @@ void	gate(t_list **lista, t_list **listb);
 void	standard(t_list **lista, t_list **listb);
 void	lstupdate(t_list **lista);
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	if(argc > 1)
+	t_list *tmp;
+	t_list *lista;
+	t_list *listb;
+
+	if (argc > 1)
 	{
-		t_list *tmp;
-		t_list *lista = NULL;
-		t_list *listb = NULL;
+		listb = NULL;
 		lista = ft_lstmake(argv);
 		tmp = lista;
-		while(tmp->next && atoi((char *)tmp->content)\
+		while (tmp->next && atoi((char *)tmp->content)\
 				< atoi((char *)tmp->next->content))
-				tmp = tmp->next;
-		if(!tmp->next)
-			return(0);
-//		output(&lista, &listb);
+			tmp = tmp->next;
+		if (!tmp->next)
+			return (0);
 		gate(&lista, &listb);
-//		output(&lista, &listb);
+		output(&lista, &listb);
 	}
-	return(0);
+	return (0);
 }
 
 void	gate(t_list **lista, t_list **listb)
 {
 	int i;
+
 	i = ft_lstlen(*lista);
 /*	if(i <= 3)
 	{
 	}                 //hardcode these solutions	
 	if(i > 3 && i <= 5)
 	{
-	}*/
-	if(i > 5)
+	}
+*/
+	if (i > 5)
 		standard(lista, listb);
 }
 
 void	output(t_list **lista, t_list **listb)
 {
-	t_list *tmp;
-	t_list *ttmp;
+	t_list	*tmp;
+	t_list	*ttmp;
+
 	tmp = *lista;
 	write(1, "Lista:\n", 7);
-	while(tmp && tmp->content)
+	while (tmp && tmp->content)
 	{
 		ft_putnbr(tmp->fpos);
 		write(1, "   ", 3);
 		ft_putendl((char *)tmp->content);
-		if(tmp->next)
+		if (tmp->next)
 			tmp = tmp->next;
 		else
-			break;
+			break ;
 	}
 	ttmp = *listb;
-	write(1, "Listb:\n" ,7);
-	while(ttmp && ttmp->content)
+	write(1, "Listb:\n", 7);
+	while (ttmp && ttmp->content)
 	{
 		ft_putnbr(ttmp->fpos);
 		write(1, "   ", 3);
 		ft_putendl((char *)ttmp->content);
-		if(ttmp->next)
+		if (ttmp->next)
 			ttmp = ttmp->next;
 		else
-			break;
+			break ;
 	}
 	write(1, "\n", 1);
 }
 
 void	order(t_list **lista)
 {
-	t_list *tmp;
-	t_list *ttmp = *lista;
-	int p = 1;
-	int i = ft_atoi((*lista)->content);
-	while(true)
+	t_list	*tmp;
+	t_list	*ttmp;
+	int		p;
+	int		i;
+
+	ttmp = *lista;
+	p = 1;
+	i = ft_atoi((*lista)->content);
+	while (true)
 	{
 		(*lista)->fpos = 0;
-		if((*lista)->next)
+		if ((*lista)->next)
 			*lista = (*lista)->next;
 		else
-			break;
+			break ;
 	}
 	*lista = ttmp;
-	while(p < ft_lstlen(ttmp) + 2)
+	while (p < ft_lstlen(ttmp) + 2)
 	{
-		while(true)
+		while (true)
 		{
-			if(i >= ft_atoi((*lista)->content) && (*lista)->fpos == 0)
+			if (i >= ft_atoi((*lista)->content) && (*lista)->fpos == 0)
 			{
 				i = ft_atoi((*lista)->content);
 				tmp = *lista;
 			}
-			if((*lista)->next)
+			if ((*lista)->next)
 				*lista = (*lista)->next;
 			else
-				break;
+				break ;
 		}
 		*lista = ttmp;
 		tmp->fpos = p;
-		while((*lista)->fpos != 0)
+		while ((*lista)->fpos != 0)
 		{
-			if((*lista)->next)
+			if ((*lista)->next)
 				*lista = (*lista)->next;
 			else
-				break;
+				break ;
 		}
-		if(!(*lista)->next && (*lista)->fpos != 0)
-			break;
+		if (!(*lista)->next && (*lista)->fpos != 0)
+			break ;
 		i = ft_atoi((*lista)->content);
 		p++;
 		*lista = ttmp;
@@ -132,15 +140,14 @@ void	order(t_list **lista)
 
 void	perform(t_list **lista, t_list **listb, t_list *node)
 {
-	if(ft_lstplen(*listb, node) > (ft_lstlen(*listb) / 2))
+	if (ft_lstplen(*listb, node) > (ft_lstlen(*listb) / 2))
 	{
-		while(*listb && node && (*listb)->fpos != node->fpos)
+		while (*listb && node && (*listb)->fpos != node->fpos)
 		{
-			if(ft_lstlen(*listb) - ft_lstplen(*listb, node) < (ft_lstlen(*listb) / 2) + 1 && *lista != node)
+			if (ft_lstlen(*listb) - ft_lstplen(*listb, node) < (ft_lstlen(*listb) / 2) + 1 && *lista != node)
 			{
 				ft_rrb(listb);
-//				output(lista, listb);
-				if(ft_posdif(*lista, node) != 0 && ft_lstlen(*lista) / 2 < ft_lstplen(*lista, node))
+				if (ft_posdif(*lista, node) != 0 && ft_lstlen(*lista) / 2 < ft_lstplen(*lista, node))
 				{
 					ft_rra(lista);
 					write(1, "rrr\n", 4);
@@ -151,7 +158,7 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 			else
 			{
 				ft_rb(listb);
-				if(ft_posdif(*lista, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node) && *listb != node)
+				if (ft_posdif(*lista, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node) && *listb != node)
 				{
 					ft_ra(lista);
 					write(1, "rr\n", 4);
@@ -161,12 +168,14 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 			}
 		}
 	}
-	if(ft_lstplen(*listb, node) <= (ft_lstlen(*listb) / 2))
+	if (ft_lstplen(*listb, node) <= (ft_lstlen(*listb) / 2))
 	{
-		while( *listb && node && *listb != node)
+		while (*listb && node && *listb != node)
 		{
 			ft_rb(listb);
-			if(ft_lstlen(*listb) - ft_lstplen(*listb, node) >= ft_posdif(*lista, node) || ft_posdif(*lista, node) < ft_lstlen(*lista) / 2) 
+			if (ft_lstlen(*listb) - ft_lstplen(*listb, node)\
+					>= ft_posdif(*lista, node)\
+					|| ft_posdif(*lista, node) < ft_lstlen(*lista) / 2)
 			{
 				ft_ra(lista);
 				write(1, "rr\n", 3);
@@ -175,26 +184,26 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 				write(1, "rb\n", 3);
 		}
 	}
-	if(ft_posdif(*lista, node) != 0)
+	if (ft_posdif(*lista, node) != 0)
 	{
-		if(ft_posdif(*lista, node) <= ft_lstlen(*lista) / 2)
+		if (ft_posdif(*lista, node) <= ft_lstlen(*lista) / 2)
 		{
-			while(ft_posdif(*lista, node) != 0)
+			while (ft_posdif(*lista, node) != 0)
 			{
 				ft_ra(lista);
 				write(1, "ra\n", 3);
 			}
 		}
-		if(ft_posdif(*lista, node) > ft_lstlen(*lista) / 2)
+		if (ft_posdif(*lista, node) > ft_lstlen(*lista) / 2)
 		{
-			while(ft_posdif(*lista, node) != 0)
+			while (ft_posdif(*lista, node) != 0)
 			{
 				ft_rra(lista);
 				write(1, "rra\n", 4);
 			}
 		}
 	}
-	if(ft_isgreater(*lista, *listb) == 1 && (*lista)->next)
+	if (ft_isgreater(*lista, *listb) == 1 && (*lista)->next)
 	{
 		ft_ra(lista);
 		write(1, "ra\n", 3);
@@ -205,53 +214,54 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 
 void	algo(t_list **lista, t_list **listb)
 {
-	t_list *ret;
-	t_list *tmp;
-	int check;
-	int y = 0;
+	t_list	*ret;
+	t_list	*tmp;
+	int		check;
+	int		y;
+
+	y = 0;
 	tmp = *listb;
-	while(tmp && *lista)
+	while (tmp && *lista)
 	{
 		y = 0;
 		check = 10000000;
 		tmp = *listb;
-		while(tmp)
+		while (tmp)
 		{
-			if(tmp)
+			if (tmp)
 			{
-				if(ft_lstplen(*listb, tmp) > (ft_lstlen(*listb) / 2 && ft_lstlen(*listb) > 2))
+				if (ft_lstplen(*listb, tmp) > (ft_lstlen(*listb) / 2 && ft_lstlen(*listb) > 2))
 				{
 					y = ft_lstlen(*listb) - ft_lstplen(*listb, tmp) + 1;
-					if(ft_posdif(*lista, tmp) != 0)
+					if (ft_posdif(*lista, tmp) != 0)
 						y = y + ft_posdif(*lista, tmp);
 				}
-				else if(ft_lstplen(*listb, tmp) <= (ft_lstlen(*listb) / 2))
+				else if (ft_lstplen(*listb, tmp) <= (ft_lstlen(*listb) / 2))
 				{
 					y = ft_lstplen(*listb, tmp) + 1;
-					if(ft_posdif(*lista, tmp) != 0)
+					if (ft_posdif(*lista, tmp) != 0)
 						y = y + ft_posdif(*lista, tmp);
 				}
 			}
-			if(y < check) // y is number of steps vs current least steps
+			if (y < check)
 			{
 				check = y;
-				ret = tmp;	//ret is to pass to the operation part of the algo
+				ret = tmp;
 			}
-			if(tmp->next)
+			if (tmp->next)
 				tmp = tmp->next;
 			else
-				break;
+				break ;
 		}
-		if(*lista)
+		if (*lista)
 			perform(lista, listb, ret);
-//		output(lista, listb);
 		ret = *listb;
 	}
 }
 
 void	pushforward(t_list **lista, t_list **listb)
 {
-		while(*lista)
+	while (*lista)
 	{
 		ft_pb(lista, listb);
 		write(1, "pb\n", 3);
@@ -266,5 +276,4 @@ void	standard(t_list **lista, t_list **listb)
 	write(1, "pa\n", 3);
 	algo(lista, listb);
 	ft_reorder(lista);
-//	output(lista, listb);
 }
