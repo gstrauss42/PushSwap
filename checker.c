@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/06 09:50:37 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/28 11:34:25 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ int main(int argc, char **argv)
 		{
 			if(check(line, &lista, &listb) == 0)
 				return(0);
-			output(&lista, &listb);
 		}
-		free(line);
+		ft_strdel(&line);
 	}
 	while(!listb && lista->next && atoi((char *)lista->content)\
 			< atoi((char *)lista->next->content))
@@ -131,23 +130,29 @@ void	output(t_list **lista, t_list **listb)
 {
 	t_list *tmp;
 	t_list *ttmp;
-	tmp = *lista;	
+	tmp = *lista;
+	write(1, "Lista:\n", 7);
 	while(tmp && tmp->content)
 	{
-		printf("lista: %s\n", tmp->content);
+		ft_putnbr(tmp->fpos);
+		write(1, "   ", 3);
+		ft_putendl((char *)tmp->content);
 		if(tmp->next)
 			tmp = tmp->next;
 		else
 			break;
 	}
 	ttmp = *listb;
-	printf("\n");
+	write(1, "Listb:\n" ,7);
 	while(ttmp && ttmp->content)
 	{
-		printf("listb: %s\n", ttmp->content);
+		ft_putnbr(ttmp->fpos);
+		write(1, "   ", 3);
+		ft_putendl((char *)ttmp->content);
 		if(ttmp->next)
 			ttmp = ttmp->next;
 		else
 			break;
 	}
+	write(1, "\n", 1);
 }

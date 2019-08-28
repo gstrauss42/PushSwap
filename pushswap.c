@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/28 09:23:35 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/28 11:34:03 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 			return(0);
 //		output(&lista, &listb);
 		gate(&lista, &listb);
-		output(&lista, &listb);
+//		output(&lista, &listb);
 	}
 	return(0);
 }
@@ -132,72 +132,75 @@ void	order(t_list **lista)
 
 void	perform(t_list **lista, t_list **listb, t_list *node)
 {
-	if(ft_lstplen(*lista, node) > (ft_lstlen(*lista) / 2))
+	if(ft_lstplen(*listb, node) > (ft_lstlen(*listb) / 2))
 	{
-		while(*lista && node && (*lista)->fpos != node->fpos)
+		while(*listb && node && (*listb)->fpos != node->fpos)
 		{
-			if(ft_lstlen(*lista) - ft_lstplen(*lista, node) < (ft_lstlen(*lista) / 2) + 1&& *listb != node)
+			if(ft_lstlen(*listb) - ft_lstplen(*listb, node) < (ft_lstlen(*listb) / 2) + 1 && *lista != node)
 			{
-				ft_rra(lista);
+				ft_rrb(listb);
 //				output(lista, listb);
-				if(ft_posdif(*listb, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node))
+				if(ft_posdif(*lista, node) != 0 && ft_lstlen(*lista) / 2 < ft_lstplen(*lista, node))
 				{
-					ft_rrb(listb);
+					ft_rra(lista);
 					write(1, "rrr\n", 4);
 				}
 				else
-					write(1, "rra\n", 4);
+					write(1, "rrb\n", 4);
 			}
 			else
 			{
 				ft_rb(listb);
-				if(ft_posdif(*listb, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node) && *listb != node)
+				if(ft_posdif(*lista, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node) && *listb != node)
 				{
-					ft_rb(listb);
+					ft_ra(lista);
 					write(1, "rr\n", 4);
 				}
 				else
-					write(1, "ra\n", 4);
+					write(1, "rb\n", 4);
 			}
 		}
 	}
-	if(ft_lstplen(*lista, node) <= (ft_lstlen(*lista) / 2))
+	if(ft_lstplen(*listb, node) <= (ft_lstlen(*listb) / 2))
 	{
-		while( *lista && node && *lista != node)
+		while( *listb && node && *listb != node)
 		{
-			ft_ra(lista);
-			if(ft_lstlen(*lista) - ft_lstplen(*lista, node) >= ft_posdif(*listb, node) || ft_posdif(*listb, node) < ft_lstlen(*listb) / 2) 
+			ft_rb(listb);
+			if(ft_lstlen(*listb) - ft_lstplen(*listb, node) >= ft_posdif(*lista, node) || ft_posdif(*lista, node) < ft_lstlen(*lista) / 2) 
 			{
-				ft_rb(listb);
+				ft_ra(lista);
 				write(1, "rr\n", 3);
 			}
 			else
-				write(1, "ra\n", 3);
-		}
-	}
-	if(ft_posdif(*listb, node) != 0)
-	{
-		if(ft_posdif(*listb, node) <= ft_lstlen(*listb) / 2)
-		{
-			while(ft_posdif(*listb, node) != 0)
-			{
-				ft_rb(listb);
 				write(1, "rb\n", 3);
+		}
+	}
+	if(ft_posdif(*lista, node) != 0)
+	{
+		if(ft_posdif(*lista, node) <= ft_lstlen(*lista) / 2)
+		{
+			while(ft_posdif(*lista, node) != 0)
+			{
+				ft_ra(lista);
+				write(1, "ra\n", 3);
 			}
 		}
-		if(ft_posdif(*listb, node) > ft_lstlen(*listb) / 2)
+		if(ft_posdif(*lista, node) > ft_lstlen(*lista) / 2)
 		{
-			while(ft_posdif(*listb, node) != 0)
+			while(ft_posdif(*lista, node) != 0)
 			{
-				ft_rrb(listb);
-				write(1, "rrb\n", 4);
+				ft_rra(lista);
+				write(1, "rra\n", 4);
 			}
 		}
 	}
-	if(ft_isgreater(*listb, *lista) == 1 && (*listb)->next)
-		ft_rb(listb);
-	ft_pb(lista, listb);
-	write(1, "pb\n", 3);
+	if(ft_isgreater(*lista, *listb) == 1 && (*lista)->next)
+	{
+		ft_ra(lista);
+		write(1, "ra\n", 3);
+	}
+	ft_pa(lista, listb);
+	write(1, "pa\n", 3);
 }
 
 void	algo(t_list **lista, t_list **listb)
@@ -206,27 +209,27 @@ void	algo(t_list **lista, t_list **listb)
 	t_list *tmp;
 	int check;
 	int y = 0;
-	tmp = *lista;
-	while(tmp && *listb)
+	tmp = *listb;
+	while(tmp && *lista)
 	{
 		y = 0;
 		check = 10000000;
-		tmp = *lista;
+		tmp = *listb;
 		while(tmp)
 		{
 			if(tmp)
 			{
-				if(ft_lstplen(*lista, tmp) > (ft_lstlen(*lista) / 2 && ft_lstlen(*lista) > 2))
+				if(ft_lstplen(*listb, tmp) > (ft_lstlen(*listb) / 2 && ft_lstlen(*listb) > 2))
 				{
-					y = ft_lstlen(*lista) - ft_lstplen(*lista, tmp) + 1;
-					if(ft_posdif(*listb, tmp) != 0)
-						y = y + ft_posdif(*listb, tmp);
+					y = ft_lstlen(*listb) - ft_lstplen(*listb, tmp) + 1;
+					if(ft_posdif(*lista, tmp) != 0)
+						y = y + ft_posdif(*lista, tmp);
 				}
-				else if(ft_lstplen(*lista, tmp) <= (ft_lstlen(*lista) / 2))
+				else if(ft_lstplen(*listb, tmp) <= (ft_lstlen(*listb) / 2))
 				{
-					y = ft_lstplen(*lista, tmp) + 1;
-					if(ft_posdif(*listb, tmp) != 0)
-						y = y + ft_posdif(*listb, tmp);
+					y = ft_lstplen(*listb, tmp) + 1;
+					if(ft_posdif(*lista, tmp) != 0)
+						y = y + ft_posdif(*lista, tmp);
 				}
 			}
 			if(y < check) // y is number of steps vs current least steps
@@ -239,29 +242,29 @@ void	algo(t_list **lista, t_list **listb)
 			else
 				break;
 		}
-		if(*listb)
+		if(*lista)
 			perform(lista, listb, ret);
-		output(lista, listb);
-		ret = *lista;
+//		output(lista, listb);
+		ret = *listb;
 	}
 }
 
-void	pushback(t_list **lista, t_list **listb)
+void	pushforward(t_list **lista, t_list **listb)
 {
-		while(*listb)
+		while(*lista)
 	{
-		ft_pa(lista, listb);
-		write(1, "pa\n", 3);
+		ft_pb(lista, listb);
+		write(1, "pb\n", 3);
 	}
 }
 
 void	standard(t_list **lista, t_list **listb)
 {
 	order(lista);
-	ft_pb(lista, listb);
-	write(1, "pb\n", 3);
+	pushforward(lista, listb);
+	ft_pa(lista, listb);
+	write(1, "pa\n", 3);
 	algo(lista, listb);
-	ft_reorder(listb);
-	output(lista, listb);
-	pushback(lista, listb);
+	ft_reorder(lista);
+//	output(lista, listb);
 }
