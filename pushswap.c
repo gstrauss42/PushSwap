@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/27 15:16:16 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/28 09:23:35 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,10 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 			}
 		}
 	}
+	if(ft_isgreater(*listb, *lista) == 1 && (*listb)->next)
+		ft_rb(listb);
 	ft_pb(lista, listb);
+	write(1, "pb\n", 3);
 }
 
 void	algo(t_list **lista, t_list **listb)
