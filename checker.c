@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/28 14:04:50 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/29 09:14:10 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,23 @@ int		main(int argc, char **argv)
 	t_list	*lista;
 	t_list	*listb;
 
-	lista = NULL;
 	listb = NULL;
-	if (!argv[1] || !argv[1][0])
+	if (!argv[1] || (!argv[1][0] && argc > 1))
 		return (0);
 	lista = ft_lstmake(argv);
 	if (error(lista) == 1)
+	{
+		write(1, "Error\n", 6);
 		return (0);
+	}
 	while (get_next_line(0, &line))
 	{
-		if (argc > 1)
-		{
-			if (check(line, &lista, &listb) == 0)
-				return (0);
-		}
+		if (check(line, &lista, &listb) == 0)
+			return (0);
 		ft_strdel(&line);
 	}
-	while (!listb && lista->next && atoi((char *)lista->content)\
-			< atoi((char *)lista->next->content))
-		lista = lista->next;
-	if (!lista->next)
-		printf("OK");
-	if (lista->next)
-		printf("KO");
+	output(&lista, &listb);
+	ft_lstcheck(lista, listb);
 	return (0);
 }
 
@@ -58,23 +52,16 @@ int		error(t_list *lista)
 		temp = lista->next;
 		while (temp && lista != temp)
 		{
-			if (lista->content && temp->content &&\
-					ft_strcmp((char *)lista->content,\
-						(char *)temp->content) == 0)
-			{
-				write(1, "Error\n", 6);
+			if (lista->content && temp->content && ft_strcmp((char *)\
+						lista->content, (char *)temp->content) == 0)
 				return (1);
-			}
 			if (temp->next)
 				temp = temp->next;
 			else
 				break ;
 		}
 		if (ft_isint(lista->content) == 0)
-		{
-			write(1, "Error\n", 6);
 			return (1);
-		}
 		if (lista->next)
 			lista = lista->next;
 		else
@@ -143,8 +130,6 @@ void	output(t_list **lista, t_list **listb)
 	write(1, "Lista:\n", 7);
 	while (tmp && tmp->content)
 	{
-		ft_putnbr(tmp->fpos);
-		write(1, "   ", 3);
 		ft_putendl((char *)tmp->content);
 		if (tmp->next)
 			tmp = tmp->next;
@@ -155,8 +140,6 @@ void	output(t_list **lista, t_list **listb)
 	write(1, "Listb:\n", 7);
 	while (ttmp && ttmp->content)
 	{
-		ft_putnbr(ttmp->fpos);
-		write(1, "   ", 3);
 		ft_putendl((char *)ttmp->content);
 		if (ttmp->next)
 			ttmp = ttmp->next;

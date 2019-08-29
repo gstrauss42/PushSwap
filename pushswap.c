@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/28 14:19:19 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/29 08:37:06 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		main(int argc, char **argv)
 		if (!tmp->next)
 			return (0);
 		gate(&lista, &listb);
-		output(&lista, &listb);
+//		output(&lista, &listb);
 	}
 	return (0);
 }
@@ -46,11 +46,11 @@ void	gate(t_list **lista, t_list **listb)
 	i = ft_lstlen(*lista);
 /*	if(i <= 3)
 	{
-	}                 //hardcode these solutions	
+	}       */
 	if(i > 3 && i <= 5)
 	{
+		standard(lista, listb);
 	}
-*/
 	if (i > 5)
 		standard(lista, listb);
 }
