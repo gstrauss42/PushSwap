@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/30 11:43:11 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/30 12:20:56 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,16 @@ int		main(int argc, char **argv)
 	t_list	*tmp;
 	t_list	*lista;
 	t_list	*listb;
-	int 	i;
+	int		i;
 
 	listb = NULL;
-	if (argc > 1)
+	if (argc > 1 && argv[1][0])
 	{
-
 		lista = ft_lstmake(argv);
 		tmp = lista;
 		i = ft_lstlen(lista);
-		if(ft_rcheck(lista) == 0)
-			return(0);
+		if (ft_rcheck(lista) == 0)
+			return (0);
 		order(&lista);
 		if (i <= 5 && i != 4)
 			ft_short_sort(&lista, &listb, i);
@@ -218,18 +217,13 @@ void	algo(t_list **lista, t_list **listb)
 	}
 }
 
-void	pushforward(t_list **lista, t_list **listb)
+void	standard(t_list **lista, t_list **listb)
 {
 	while (*lista)
 	{
 		ft_pb(lista, listb);
 		write(1, "pb\n", 3);
 	}
-}
-
-void	standard(t_list **lista, t_list **listb)
-{
-	pushforward(lista, listb);
 	ft_pa(lista, listb);
 	write(1, "pa\n", 3);
 	algo(lista, listb);
