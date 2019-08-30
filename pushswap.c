@@ -6,49 +6,40 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/30 10:22:11 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:43:11 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 
 void	order(t_list **lista);
-void	gate(t_list **lista, t_list **listb);
 void	standard(t_list **lista, t_list **listb);
 void	lstupdate(t_list **lista);
 
 int		main(int argc, char **argv)
 {
-	t_list *tmp;
-	t_list *lista;
-	t_list *listb;
+	t_list	*tmp;
+	t_list	*lista;
+	t_list	*listb;
+	int 	i;
 
+	listb = NULL;
 	if (argc > 1)
 	{
-		listb = NULL;
+
 		lista = ft_lstmake(argv);
 		tmp = lista;
-		while (tmp->next && atoi((char *)tmp->content)\
-				< atoi((char *)tmp->next->content))
-			tmp = tmp->next;
-		if (!tmp->next)
-			return (0);
-		gate(&lista, &listb);
+		i = ft_lstlen(lista);
+		if(ft_rcheck(lista) == 0)
+			return(0);
+		order(&lista);
+		if (i <= 5 && i != 4)
+			ft_short_sort(&lista, &listb, i);
+		else
+			standard(&lista, &listb);
 		ft_lstoutput(&lista, &listb);
 	}
 	return (0);
-}
-
-void	gate(t_list **lista, t_list **listb)
-{
-	int i;
-
-	i = ft_lstlen(*lista);
-	order(lista);
-	if (i <= 5 && i != 4)
-		ft_short_sort(lista, listb, i);
-	else
-		standard(lista, listb);
 }
 
 void	order(t_list **lista)
