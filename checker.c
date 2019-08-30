@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/30 09:53:03 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/30 10:22:55 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(int argc, char **argv)
 			return (0);
 		ft_strdel(&line);
 	}
-//	output(&lista, &listb);
+//	ft_lstoutput(&lista, &listb);
 	ft_lstcheck(lista, listb);
 	return (0);
 }
@@ -119,32 +119,4 @@ int		checks(char *line, t_list **lista, t_list **listb, int i)
 		return (0);
 	}
 	return (1);
-}
-
-void	output(t_list **lista, t_list **listb)
-{
-	t_list *tmp;
-	t_list *ttmp;
-
-	tmp = *lista;
-	write(1, "Lista:\n", 7);
-	while (tmp && tmp->content)
-	{
-		ft_putendl((char *)tmp->content);
-		if (tmp->next)
-			tmp = tmp->next;
-		else
-			break ;
-	}
-	ttmp = *listb;
-	write(1, "Listb:\n", 7);
-	while (ttmp && ttmp->content)
-	{
-		ft_putendl((char *)ttmp->content);
-		if (ttmp->next)
-			ttmp = ttmp->next;
-		else
-			break ;
-	}
-	write(1, "\n", 1);
 }

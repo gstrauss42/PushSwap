@@ -6,14 +6,13 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/30 10:03:53 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/30 10:22:11 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 
 void	order(t_list **lista);
-void	output(t_list **lista, t_list **listb);
 void	gate(t_list **lista, t_list **listb);
 void	standard(t_list **lista, t_list **listb);
 void	lstupdate(t_list **lista);
@@ -35,7 +34,7 @@ int		main(int argc, char **argv)
 		if (!tmp->next)
 			return (0);
 		gate(&lista, &listb);
-		output(&lista, &listb);
+		ft_lstoutput(&lista, &listb);
 	}
 	return (0);
 }
@@ -43,45 +42,13 @@ int		main(int argc, char **argv)
 void	gate(t_list **lista, t_list **listb)
 {
 	int i;
-	
+
 	i = ft_lstlen(*lista);
 	order(lista);
-	if(i == 3 || i == 5)
+	if (i <= 5 && i != 4)
 		ft_short_sort(lista, listb, i);
 	else
 		standard(lista, listb);
-}
-
-void	output(t_list **lista, t_list **listb)
-{
-	t_list	*tmp;
-	t_list	*ttmp;
-
-	tmp = *lista;
-	write(1, "Lista:\n", 7);
-	while (tmp && tmp->content)
-	{
-		ft_putnbr(tmp->fpos);
-		write(1, "   ", 3);
-		ft_putendl((char *)tmp->content);
-		if (tmp->next)
-			tmp = tmp->next;
-		else
-			break ;
-	}
-	ttmp = *listb;
-	write(1, "Listb:\n", 7);
-	while (ttmp && ttmp->content)
-	{
-		ft_putnbr(ttmp->fpos);
-		write(1, "   ", 3);
-		ft_putendl((char *)ttmp->content);
-		if (ttmp->next)
-			ttmp = ttmp->next;
-		else
-			break ;
-	}
-	write(1, "\n", 1);
 }
 
 void	order(t_list **lista)
@@ -141,10 +108,12 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 	{
 		while (*listb && node && (*listb)->fpos != node->fpos)
 		{
-			if (ft_lstlen(*listb) - ft_lstplen(*listb, node) < (ft_lstlen(*listb) / 2) + 1 && *lista != node)
+			if (ft_lstlen(*listb) - ft_lstplen(*listb, node)\
+					< (ft_lstlen(*listb) / 2) + 1 && *lista != node)
 			{
 				ft_rrb(listb);
-				if (ft_posdif(*lista, node) != 0 && ft_lstlen(*lista) / 2 < ft_lstplen(*lista, node))
+				if (ft_posdif(*lista, node) != 0 && ft_lstlen(*lista)\
+						/ 2 < ft_lstplen(*lista, node))
 				{
 					ft_rra(lista);
 					write(1, "rrr\n", 4);
@@ -155,7 +124,8 @@ void	perform(t_list **lista, t_list **listb, t_list *node)
 			else
 			{
 				ft_rb(listb);
-				if (ft_posdif(*lista, node) != 0 && ft_lstlen(*listb) / 2 < ft_lstplen(*listb, node) && *listb != node)
+				if (ft_posdif(*lista, node) != 0 && ft_lstlen(*listb)\
+						/ 2 < ft_lstplen(*listb, node) && *listb != node)
 				{
 					ft_ra(lista);
 					write(1, "rr\n", 4);
@@ -227,7 +197,8 @@ void	algo(t_list **lista, t_list **listb)
 		{
 			if (tmp)
 			{
-				if (ft_lstplen(*listb, tmp) > (ft_lstlen(*listb) / 2 && ft_lstlen(*listb) > 2))
+				if (ft_lstplen(*listb, tmp) > (ft_lstlen(*listb)\
+							/ 2 && ft_lstlen(*listb) > 2))
 				{
 					y = ft_lstlen(*listb) - ft_lstplen(*listb, tmp) + 1;
 					if (ft_posdif(*lista, tmp) != 0)
