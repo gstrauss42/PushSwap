@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/29 09:14:10 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/30 09:53:03 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(int argc, char **argv)
 			return (0);
 		ft_strdel(&line);
 	}
-	output(&lista, &listb);
+//	output(&lista, &listb);
 	ft_lstcheck(lista, listb);
 	return (0);
 }

@@ -6,12 +6,13 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/08/29 08:37:06 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/08/30 10:03:53 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 
+void	order(t_list **lista);
 void	output(t_list **lista, t_list **listb);
 void	gate(t_list **lista, t_list **listb);
 void	standard(t_list **lista, t_list **listb);
@@ -34,7 +35,7 @@ int		main(int argc, char **argv)
 		if (!tmp->next)
 			return (0);
 		gate(&lista, &listb);
-//		output(&lista, &listb);
+		output(&lista, &listb);
 	}
 	return (0);
 }
@@ -42,16 +43,12 @@ int		main(int argc, char **argv)
 void	gate(t_list **lista, t_list **listb)
 {
 	int i;
-
+	
 	i = ft_lstlen(*lista);
-/*	if(i <= 3)
-	{
-	}       */
-	if(i > 3 && i <= 5)
-	{
-		standard(lista, listb);
-	}
-	if (i > 5)
+	order(lista);
+	if(i == 3 || i == 5)
+		ft_short_sort(lista, listb, i);
+	else
 		standard(lista, listb);
 }
 
@@ -270,7 +267,6 @@ void	pushforward(t_list **lista, t_list **listb)
 
 void	standard(t_list **lista, t_list **listb)
 {
-	order(lista);
 	pushforward(lista, listb);
 	ft_pa(lista, listb);
 	write(1, "pa\n", 3);
