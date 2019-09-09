@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/09/07 03:32:06 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/09/09 09:10:17 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,62 +37,9 @@ int		main(int argc, char **argv)
 		else
 			standard(&lista, &listb);
 	}
-	ft_lstoutput(&lista, &listb);
 	ft_lstdel(&lista, ft_del);
 	ft_lstdel(&listb, ft_del);
-	sleep(10);
 	return (0);
-}
-
-void	order(t_list **lista)
-{
-	t_list	*tmp;
-	t_list	*ttmp;
-	int		p;
-	int		i;
-
-	ttmp = *lista;
-	p = 1;
-	i = ft_atoi((*lista)->content);
-	while (true)
-	{
-		(*lista)->fpos = 0;
-		if ((*lista)->next)
-			*lista = (*lista)->next;
-		else
-			break ;
-	}
-	*lista = ttmp;
-	while (p < ft_lstlen(ttmp) + 2)
-	{
-		while (true)
-		{
-			if (i >= ft_atoi((*lista)->content) && (*lista)->fpos == 0)
-			{
-				i = ft_atoi((*lista)->content);
-				tmp = *lista;
-			}
-			if ((*lista)->next)
-				*lista = (*lista)->next;
-			else
-				break ;
-		}
-		*lista = ttmp;
-		tmp->fpos = p;
-		while ((*lista)->fpos != 0)
-		{
-			if ((*lista)->next)
-				*lista = (*lista)->next;
-			else
-				break ;
-		}
-		if (!(*lista)->next && (*lista)->fpos != 0)
-			break ;
-		i = ft_atoi((*lista)->content);
-		p++;
-		*lista = ttmp;
-	}
-	*lista = ttmp;
 }
 
 void	standard(t_list **lista, t_list **listb)
