@@ -37,7 +37,6 @@ int		main(int argc, char **argv)
 		else
 			standard(&lista, &listb);
 	}
-	sleep(15);
 	return (0);
 }
 
