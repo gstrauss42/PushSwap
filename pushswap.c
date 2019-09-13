@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:03:22 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/09/13 12:22:42 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/09/13 12:29:32 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int		main(int argc, char **argv)
 		else
 			standard(&lista, &listb);
 	}
-	sleep(3);
 	return (0);
 }
 
