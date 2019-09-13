@@ -6,7 +6,7 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 09:47:38 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/09/02 08:58:31 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/09/13 10:37:42 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		main(int argc, char **argv)
 	if (!argv[1] || (!argv[1][0] && argc > 1))
 		return (0);
 	lista = ft_lstmake(argv);
+	order(&lista);
 	if (error(lista) == 1)
 	{
 		write(1, "Error\n", 6);
