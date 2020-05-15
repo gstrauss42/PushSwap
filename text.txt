@@ -1,2 +1,0 @@
-(optional_) optimise:
-./push_swap 1 -2 3 -100 -99 (worst case for 5)
